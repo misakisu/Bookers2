@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h2>User info</h2>
+   	<%= attachment_image_tag user, :profile_image, format: 'jpg', class: "pull-left list-img", fallback: "no_image.jpg", size:"100×100" %>
+	<table class="table">
+		  <tr>
+		    <th>name</th><td><%= user.name %></td>
+		  </tr>
+		  <tr>
+		    <th>introduction</th><td><%= user.introduction %></td>
+		  </tr>
+  </table>
+  </div>
+  <div class="col-xs-12">
+    <% if user.id == current_user.id %>
+    <button type="button" class="btn btn-default col-xs-12 glyphicon glyphicon-wrench"><%= link_to "", edit_user_path(user.id) %></button>
+    <% else %>
+    <button type="button" class="btn btn-default col-xs-12 glyphicon glyphicon-wrench"><%= link_to "", user_path(current_user.id) %></button>
+    <% end %>
+  </div>
+</div>

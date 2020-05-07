@@ -1,0 +1,31 @@
+<body>
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<div class="text-danger">
+  <% if @book.errors.any? %>
+    <h3><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h3>
+    <% @book.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>
+</div>
+
+
+<h1 class="space">Editing Book</h1>
+<div class="row">
+<%= form_for(@book) do |f| %>
+    <p>Title</p>
+    <%= f.text_field :title, class:"col-xs-12" %>
+
+    <p>Body</p>
+    <%= f.text_area :body, class:"col-xs-12" %>
+
+    <%= f.submit ' Update Book ', class:"btn btn-primary col-xs-12" %>
+
+<% end %>
+</div>
+<p><%= link_to "Show", book_path(@book.id) %> | <%= link_to "Back", books_path %></p>
+
+</div>
+</div>
+</body>
