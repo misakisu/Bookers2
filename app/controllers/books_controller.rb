@@ -2,10 +2,11 @@ class BooksController < ApplicationController
   def show
   	@book = Book.find(params[:id])
     @user = @book.user #3行目のBook情報からiⅮ取得
+    @booknew = Book.new #空のインスタンス。3行目で定義済みだからbooknewへ
   end
 
   def create
-  	@book = Book.new(book_params)
+  	@book = Book.new(book_params)#５行目でNewにしているからここもnewにする必要はない
     @book.user_id = current_user.id #ログインしているアカウント情報のＩＤを代入している。コントローラー内でのやりとりであれば、この分だけで十分。念のためカラムへ追加。
     @books = Book.all #renderはviewへ直接行くことしかできないため、コントローラーにあるdata allを見ることはできない。そのためここでこの記載が必要。
     if @book.save
@@ -18,6 +19,9 @@ class BooksController < ApplicationController
 
   def edit
   	@book = Book.find(params[:id])
+    if current_user.id != @book.user.id
+      redirect_to books_path
+    end
   end
 
   def update

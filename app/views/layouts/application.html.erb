@@ -30,13 +30,13 @@
           </li>
           <% else %>
           <li>
-          <%= link_to " Home", home_path, class:"glyphicon glyphicon-home" %>
+          <%= link_to " Home", root_path, class:"glyphicon glyphicon-home" %>
           </li>
           <li>
-          <%= link_to ' About', about_path, class:"glyphicon glyphicon-link" %>
+          <%= link_to ' About', home_about_path, class:"glyphicon glyphicon-link" %>
           </li>
           <li>
-          <%= link_to ' signup', new_user_registration_path, class:"glyphicon glyphicon-edit" %>
+          <%= link_to ' sign up', new_user_registration_path, class:"glyphicon glyphicon-edit" %>
           </li>
           <li>
           <%= link_to ' login', new_user_session_path, class:"glyphicon glyphicon-log-in" %>
@@ -45,7 +45,12 @@
         </ul>
      </div>
   </header>
-      <%= yield %>
-</body>
 
+<%= yield %>
+
+  <footer class="footer col-md-offset-9">
+    <p>CopyRight Infratop.inc</p>
+  </footer>
+
+</body>
 </html>
