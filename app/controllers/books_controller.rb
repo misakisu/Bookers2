@@ -3,6 +3,8 @@ class BooksController < ApplicationController
   	@book = Book.find(params[:id])
     @user = @book.user #3行目のBook情報からiⅮ取得
     @booknew = Book.new #空のインスタンス。3行目で定義済みだからbooknewへ
+    @book_comments = @book.book_comments #commentはNのためAllにしなくてももってこれる。
+    @book_commentnew = BookComment.new
   end
 
   def create
@@ -35,19 +37,19 @@ class BooksController < ApplicationController
   end
 
   def index
-    @book = Book.new
+    @booknew = Book.new
     @books = Book.all
   end
 
   def destroy
-    book = Book.find(params[:id])
-    book.destroy
+    @book = Book.find(params[:id])
+    @book.destroy
     redirect_to books_path
   end
 
   private
   def book_params
-  	params.require(:book).permit(:title, :body, :user_id)
+  	params.require(:book).permit(:title, :body)
   end
 
 end

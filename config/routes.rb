@@ -4,5 +4,9 @@ Rails.application.routes.draw do
   root to: 'homes#home'
   get 'home/about' => 'homes#about'
   resources :users, only: [:index, :show, :edit, :update]
-  resources :books, only: [:index, :show, :create, :edit, :update, :destroy]
+  resources :books, only: [:index, :show, :create, :edit, :update, :destroy] do
+    resource :favorites, only: [:create, :destroy]
+    resources :book_comments, only: [:create, :destroy] #単数（ネスト）にすると（そのContorollerの）idがリクエストに含まれない。つまり、BookのIdのみ拾ってくる。
+  end
+  #resources :book_comments, only: [:destroy] #単数にすると（そのContorollerの）idがリクエストに含まれない。つまり、BookのIdのみ拾ってくる。
 end

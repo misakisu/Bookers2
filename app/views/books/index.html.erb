@@ -3,7 +3,7 @@
   <div class="row">
 	<div class="col-xs-3">
       <%= render 'users/list', user: current_user %>
-      <%= render 'form', book: @book %>
+      <%= render 'form', book: @booknew %>
     </div>
   <div class="col-xs-9">
     <h2>Books</h2>
@@ -15,17 +15,32 @@
 			<th>Opinion</th>
 		  </tr>
 	    </thead>
-		<% @books.each do |book| %>
+	    <% @books.each do |book| %>
 		<tr>
-		  <td>
-		  <%= link_to user_path(book.user.id) do %>
-          <%= attachment_image_tag book.user, :profile_image, format: 'jpg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"40×40" %>
-          <% end %>
-          </td>
-		  <td><%= link_to book.title, book_path(book.id) %></td>
-		  <td><%= book.body %></td>
-		</tr>
-        <% end %>
+     	    <td>
+		    <%= link_to user_path(book.user.id) do %>
+            <%= attachment_image_tag book.user, :profile_image, format: 'jpg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"40×40" %>
+            <% end %>
+            </td>
+		    <td><%= link_to book.title, book_path(book.id) %></td>
+		    <td><%= book.body %></td>
+		    <td class="comment-count">コメント数：<%= book.book_comments.count %></td>
+		    <td>
+		    <% if book.favorited_by?(current_user) %>
+              <%= link_to book_favorites_path(book), method: :delete do %>
+              <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i><!--なぜここがredなのか-->
+              <%= book.favorites.count %>
+              <% end %>
+            <% else %>
+              <%= link_to book_favorites_path(book), method: :post do %>
+              <i class="fa fa-heart-o" aria-hidden="true"></i>
+              <%= book.favorites.count %>
+              <% end %>
+            <% end %>
+            </td>
+	        <td>
+	        </tr>
+	        <% end %>
       </table>
    </div>
   </div>
