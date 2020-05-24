@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :books, only: [:index, :show, :create, :edit, :update, :destroy] do
     resource :favorites, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy] #単数（ネスト）にすると（そのContorollerの）idがリクエストに含まれない。つまり、BookのIdのみ拾ってくる。
+    #resources :book_comments, only: [:destroy] #単数にすると（そのContorollerの）idがリクエストに含まれない。つまり、BookのIdのみ拾ってくる。
   end
-  #resources :book_comments, only: [:destroy] #単数にすると（そのContorollerの）idがリクエストに含まれない。つまり、BookのIdのみ拾ってくる。
+  resources :relationships, only: [:create, :destroy]
 end

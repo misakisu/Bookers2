@@ -9,6 +9,12 @@
 		  <tr>
 		    <th>introduction</th><td><%= user.introduction %></td>
 		  </tr>
+      <tr>
+        <th>follows</th><td><%= user.followings.count %></td>
+      </tr>
+      <tr>
+        <th>followers</th><td><%= user.followers.count %></td>
+      </tr>
   </table>
   </div>
   <div class="col-xs-12">
@@ -23,3 +29,4 @@
     <% end %>
   </div>
 </div>
+

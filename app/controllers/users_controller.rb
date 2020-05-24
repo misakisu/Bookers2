@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   	@books = @user.books
   	@book = Book.new
+    @relationship = Relationship.where(user_id: current_user.id, follow_user_id: params[:id])
   end
 
   def edit
